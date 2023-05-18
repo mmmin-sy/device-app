@@ -1,5 +1,6 @@
-import React, { useEffect, useState, ReactNode, FC } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Styled from './DeviceList.styles';
+import Table from '../Table/Table';
 
 interface DeviceType {
 	deviceName: string;
@@ -8,7 +9,7 @@ interface DeviceType {
 	batteryStatus: number;
 }
 
-const DeviceList: React.FC = () => {
+const DeviceList = () => {
     const [data, setData] = useState<DeviceType[] | null>(null);
 	const [error, setError] = useState(null);
 
@@ -50,7 +51,7 @@ const DeviceList: React.FC = () => {
         <div className={Styled.Container}>
             <div>
                 {data
-                    ? data.map(item => item.ownerName)
+                    ? <Table rows={data} headers={['Device name', 'Device type', 'Owner name', 'Batter status']} />
                     : 'No device item'
                 }
             </div>
