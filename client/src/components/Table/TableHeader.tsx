@@ -1,31 +1,32 @@
-import { useState } from 'react';
 import * as Styled from './Table.styles';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import TableHeaderCell from './TableHeaderCell';
 
 interface TableHeader {
     data: string[];
     hasSort?: boolean;
     hasEdit?: boolean;
     hasDelete?: boolean;
+    onSorting?: (index: number, ascending: boolean) => void;
+    currentAscendingIndex?: number | null;
 }
 
-const TableHeader = ({ data, hasSort = false, hasEdit = false, hasDelete = false}: TableHeader) => {
-    const [ascending, setAscending] = useState<boolean | null>(null);
+const TableHeader = ({ data, hasSort = false, hasEdit = false, hasDelete = false, onSorting, currentAscendingIndex}: TableHeader) => {
     let columnCount = Math.floor(data.length);
     columnCount = hasEdit ? columnCount + 1 : columnCount;
     columnCount = hasDelete ? columnCount + 1 : columnCount;
 
     return (
         <Styled.TableHeader columns={columnCount} columnsPercentage={100/columnCount}>
-            {data.map(item => 
-                <Styled.Cell>
-                    {item}
-                    {hasSort && 
-                        <Styled.Sort onClick={() => console.log('sort!')}>
-                            {(ascending || ascending === null) ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}                            
-                        </Styled.Sort>
-                    }
-                </Styled.Cell>
+            {data.map((item, idx) => 
+                <TableHeaderCell 
+                    key={idx}
+                    index={idx} 
+                    item={item} 
+                    hasSort={hasSort} 
+                    onSorting={(index: number, ascending: boolean) => onSorting && onSorting(index, ascending)} 
+                    currentAscendingIndex={currentAscendingIndex}
+                />
+                
             )}
         </Styled.TableHeader>  
     );

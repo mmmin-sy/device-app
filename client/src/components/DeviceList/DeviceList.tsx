@@ -8,15 +8,15 @@ import DeviceAddModal from '../DeviceAddModal/DeviceAddModal';
 export interface DeviceType {
 	id: number;
 	deviceName: string;
-	ownerName: string;
 	deviceType: 'Smartphone' | 'Tablet' | 'Camera';
+	ownerName: string;
 	batteryStatus: number;
 }
 
 export interface DeviceAddFormType {
 	deviceName: string;
-	ownerName: string;
 	deviceType: 'Smartphone' | 'Tablet' | 'Camera';
+	ownerName: string;
 	batteryStatus: number;
 }
 
@@ -25,6 +25,8 @@ const DeviceList = () => {
 	const [error, setError] = useState(null);
 	const [openAddModal, setOpenAddModal] = useState<boolean>(false);
 	const [openEditModal, setOpenEditModal] = useState<number | null>(null);
+	const [currentAscending, setCurrentAscending] = useState<boolean | null>(null);
+	const [currentAscendingIndex, setCurrentAscendingIndex] = useState<number | null>(null);
 
 	useEffect(() => {
 		getDeviceList();
@@ -42,8 +44,9 @@ const DeviceList = () => {
 		addItem({
 			id: maxId + 1,
 			deviceName: newData.deviceName,
-			ownerName: newData.ownerName,
 			deviceType: newData.deviceType,
+			ownerName: newData.ownerName,
+
 			batteryStatus: newData.batteryStatus
 		})
 		.then(data => {
@@ -76,6 +79,32 @@ const DeviceList = () => {
 		return  values;
 	}
 
+	const onSorting = (index: number, ascending: boolean) => {
+		setCurrentAscending(ascending);
+		setCurrentAscendingIndex(index);
+
+		const sampleObj = data[0];
+		const sortingKey = Object.keys(sampleObj)[index];
+
+		if(sortingKey === 'id'){ // number
+			data.sort((a, b) => a.id - b.id)			
+		} else if(sortingKey === 'batteryStatus') {
+			data.sort((a, b) => a.batteryStatus - b.batteryStatus)
+		} else if(sortingKey === 'deviceName') {
+			data.sort((a, b) => a.deviceName.localeCompare(b.deviceName))
+		} else if(sortingKey === 'deviceType') {
+			data.sort((a, b) => a.deviceType.localeCompare(b.deviceType))
+		} else if(sortingKey === 'ownerName') {
+			data.sort((a, b) => a.ownerName.localeCompare(b.ownerName))
+		}
+
+		if (!ascending){
+			data.reverse();
+		} 
+		console.log('#', data)
+		
+	}
+
     return (
         <div className={Styled.Container}>			
             <div>
@@ -89,6 +118,8 @@ const DeviceList = () => {
 							hasDelete 
 							toggleModal={(toggle: number | null) => setOpenEditModal(toggle)}
 							onDeleteRow={deleteDevice}
+							onSorting={(idx: number, ascending: boolean) => onSorting(idx, ascending)}
+							currentAscendingIndex={currentAscendingIndex}
 						/>
 					) 
                     : 'No device item'

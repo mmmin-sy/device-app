@@ -2,25 +2,25 @@ import axios from 'axios';
 import { DeviceType } from '../components/DeviceList/DeviceList';
 
 export const getList = () => {
-    return axios.get('/list')
+    return axios.get('/api/device')
     .then(data => data.data)
     .catch(error => error)
 }
 
 export const addItem = (data: DeviceType) => {
-    return axios.post('/add', data)
+    return axios.post('/api/device', data)
     .then(data => data.data)
     .catch(error => error)
 }
 
 export const deleteItem = (id: number)  => {
-    return axios.delete('/' + id)
+    return axios.delete('/api/device/' + id)
     .then(data => data.data)
     .catch(error => error)
 }
 
 export const updateItem = (data: DeviceType)  => {
-    return axios.post('/update', data)
+    return axios.put('/api/device/' + data.id, data)
     .then(data => data.data)
     .catch(error => error);
 }

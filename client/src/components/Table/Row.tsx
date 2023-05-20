@@ -12,10 +12,8 @@ interface RowProps {
 }
 
 const Row = ({ id, rowData, hasEdit = false, hasDelete = false, onDeleteRow, toggleModal }: RowProps) => {
-    
     const values = Object.values(rowData);
-    const keys = Object.keys(rowData);
-
+    console.log('###', values)
     let columnCount = Math.floor(values.length);
     columnCount = hasEdit ? columnCount + 1 : columnCount;
     columnCount = hasDelete ? columnCount + 1 : columnCount;
