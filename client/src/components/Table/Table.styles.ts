@@ -41,7 +41,7 @@ export const Cell = styled.div<CellStyleProps>`
     ${({ align }) => css`
         position: relative;
         padding: 5px;
-
+        word-break: break-all;
         ${align && css`
             text-align: ${align};
         `}        
