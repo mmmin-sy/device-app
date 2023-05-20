@@ -24,6 +24,7 @@ export const Modal = styled.div<ModalStyleProps>`
 
         margin-left: ${modalPositionLeft}px;
         margin-top: ${modalPositionTop}px;
+        border-radius: 5px;
     `}
 `
 export const ContentWrap = styled.div`

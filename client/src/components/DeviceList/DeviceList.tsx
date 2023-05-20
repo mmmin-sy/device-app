@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import * as Styled from './DeviceList.styles';
 import Table from '../Table/Table';
 import { getList, addItem, deleteItem, updateItem } from './../../api/DeviceApi';
-import Modal from '../Modal/Modal';
+import DeviceEditModal from '../DeviceEditModal/DeviceEditModal';
+import DeviceAddModal from '../DeviceAddModal/DeviceAddModal';
 
 export interface DeviceType {
 	id: number;
@@ -12,10 +13,18 @@ export interface DeviceType {
 	batteryStatus: number;
 }
 
+export interface DeviceAddFormType {
+	deviceName: string;
+	ownerName: string;
+	deviceType: 'Smartphone' | 'Tablet' | 'Camera';
+	batteryStatus: number;
+}
+
 const DeviceList = () => {
-    const [data, setData] = useState<DeviceType[] | null>(null);
+    const [data, setData] = useState<DeviceType[]>([]);
 	const [error, setError] = useState(null);
-	
+	const [openAddModal, setOpenAddModal] = useState<boolean>(false);
+	const [openEditModal, setOpenEditModal] = useState<number | null>(null);
 
 	useEffect(() => {
 		getDeviceList();
@@ -27,24 +36,31 @@ const DeviceList = () => {
 		.catch(error => setError(error))
 	}
 
-	const addDevice = () => {
+	const addDevice = (newData: DeviceAddFormType) => {
 		const maxId = data ? Math.max(...data.map(item => item.id)) : 0;
 
 		addItem({
 			id: maxId + 1,
-			deviceName: 'Apple',
-			ownerName: 'Susan',
-			deviceType: 'Smartphone',
-			batteryStatus: 10
+			deviceName: newData.deviceName,
+			ownerName: newData.ownerName,
+			deviceType: newData.deviceType,
+			batteryStatus: newData.batteryStatus
 		})
-		.then(data => setData(data));
+		.then(data => {
+			setData(data)
+			setOpenAddModal(false)
+		});
 	}
 	
-	const editDevice = (updateData: DeviceType) => {
+	const editDevice = (updateData: DeviceType) => {		
 		const availableData = data?.find(item => item.id === updateData.id) ?? undefined;
+
 		if(availableData) {
 			updateItem(updateData)
-			.then(data => setData(data))
+			.then(data => {
+				setData(data)
+				setOpenEditModal(null)
+			})
 			.catch(error => setError(error));
 		}
 	}
@@ -54,6 +70,12 @@ const DeviceList = () => {
 		.then(data => setData(data));
 	}
 
+	const getRowValues = (id: number) => {
+		const row = data.find(item => item.id === id) ?? {};
+		const values: (string|number)[] = Object.values(row);
+		return  values;
+	}
+
     return (
         <div className={Styled.Container}>			
             <div>
@@ -61,12 +83,12 @@ const DeviceList = () => {
                     ? (
 						<Table 
 							rows={data} 
-							headers={['id', 'Device name', 'Device type', 'Owner name', 'Batter status']} 
+							headers={['Id', 'Device Name', 'Device Type', 'Owner Name', 'Batter Status']} 
 							hasSort 
 							hasEdit 
 							hasDelete 
+							toggleModal={(toggle: number | null) => setOpenEditModal(toggle)}
 							onDeleteRow={deleteDevice}
-							onEditRow={editDevice}
 						/>
 					) 
                     : 'No device item'
@@ -74,16 +96,22 @@ const DeviceList = () => {
             </div>
 
 			{error && <span>Error!</span>}	
-            <button onClick={() => addDevice()}>Add</button>
+            <button onClick={() => setOpenAddModal(true)}>New Device</button>
 
-			
-			<button onClick={() => editDevice({
-			id: 7,
-			deviceName: 'Updated',
-			ownerName: 'Updated',
-			deviceType: 'Smartphone',
-			batteryStatus: 10
-		})}>Update 0</button>
+			{openAddModal && (
+				<DeviceAddModal 
+					toggleModal={(toggle: boolean) => setOpenAddModal(toggle)} 
+					onAddItem={addDevice}
+				/>
+			)}
+
+			{openEditModal !== null && data && (
+				<DeviceEditModal 
+					data={getRowValues(openEditModal)}
+					toggleModal={(toggle: number | null) => setOpenEditModal(toggle)} 
+					onEditItem={editDevice}
+				/>
+			)}
         </div>
     );
 }

@@ -5,10 +5,10 @@ interface ModalProps {
     height: number;
     children: React.ReactNode;
     onCancle: () => void;
-    onEdit?: () => void;
+    onSave?: () => void;
 }
 
-const Modal = ({ width, height, onCancle, onEdit, children }: ModalProps) => {
+const Modal = ({ width, height, onCancle, onSave, children }: ModalProps) => {
     const modalPositionLeft = (document.documentElement.clientWidth * 0.5) - (width * 0.5);
     const modalPositionTop = (document.documentElement.clientHeight * 0.5) - (height * 0.5);
 
@@ -24,7 +24,7 @@ const Modal = ({ width, height, onCancle, onEdit, children }: ModalProps) => {
                     <Styled.Content>{children}</Styled.Content>               
                     <Styled.ButtonWrap>
                         <Styled.Button onClick={() => onCancle()}>Close</Styled.Button>
-                        <Styled.Button onClick={() => onEdit && onEdit()}>Edit</Styled.Button>
+                        <Styled.Button onClick={() => onSave && onSave()}>Save</Styled.Button>
                     </Styled.ButtonWrap>
                 </Styled.ContentWrap>
                 

@@ -8,11 +8,11 @@ interface TableProps {
     hasSort?: boolean;
     hasEdit?: boolean;
     hasDelete?: boolean;
+    toggleModal?: (toggle: number | null) => void;
     onDeleteRow?: (id: number) => void;
-    onEditRow?: (data: any) => void;
 }
 
-const Table = ({ rows, headers, hasSort = false, hasEdit = false, hasDelete = false, onDeleteRow, onEditRow }: TableProps) => {
+const Table = ({ rows, headers, hasSort = false, hasEdit = false, hasDelete = false, toggleModal, onDeleteRow }: TableProps) => {
     return (
         <Styled.Table>
             <TableHeader data={headers} hasSort={hasSort} hasEdit={hasEdit} hasDelete={hasDelete} />
@@ -25,8 +25,8 @@ const Table = ({ rows, headers, hasSort = false, hasEdit = false, hasDelete = fa
                         id={row.id} 
                         hasEdit={hasEdit} 
                         hasDelete={hasDelete} 
+                        toggleModal={(toggle) => toggleModal && toggleModal(toggle)}
                         onDeleteRow={(id) => onDeleteRow && onDeleteRow(id)}
-                        onEditRow={(data) => onEditRow && onEditRow(data)}
                     />
                 ))}
             </Styled.TableBody>
