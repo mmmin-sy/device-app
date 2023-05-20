@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import * as Styled from './DeviceList.styles';
 import Table from '../Table/Table';
 import { getList, addItem, deleteItem, updateItem } from './../../api/DeviceApi';
+import Modal from '../Modal/Modal';
 
 export interface DeviceType {
 	id: number;
@@ -14,6 +15,7 @@ export interface DeviceType {
 const DeviceList = () => {
     const [data, setData] = useState<DeviceType[] | null>(null);
 	const [error, setError] = useState(null);
+	
 
 	useEffect(() => {
 		getDeviceList();
@@ -38,7 +40,7 @@ const DeviceList = () => {
 		.then(data => setData(data));
 	}
 	
-	const updateDevice = (updateData: DeviceType) => {
+	const editDevice = (updateData: DeviceType) => {
 		const availableData = data?.find(item => item.id === updateData.id) ?? undefined;
 		if(availableData) {
 			updateItem(updateData)
@@ -53,16 +55,35 @@ const DeviceList = () => {
 	}
 
     return (
-        <div className={Styled.Container}>
+        <div className={Styled.Container}>			
             <div>
                 {data
-                    ? <Table rows={data} headers={['id', 'Device name', 'Device type', 'Owner name', 'Batter status']} />
+                    ? (
+						<Table 
+							rows={data} 
+							headers={['id', 'Device name', 'Device type', 'Owner name', 'Batter status']} 
+							hasSort 
+							hasEdit 
+							hasDelete 
+							onDeleteRow={deleteDevice}
+							onEditRow={editDevice}
+						/>
+					) 
                     : 'No device item'
                 }
             </div>
 
 			{error && <span>Error!</span>}	
             <button onClick={() => addDevice()}>Add</button>
+
+			
+			<button onClick={() => editDevice({
+			id: 7,
+			deviceName: 'Updated',
+			ownerName: 'Updated',
+			deviceType: 'Smartphone',
+			batteryStatus: 10
+		})}>Update 0</button>
         </div>
     );
 }

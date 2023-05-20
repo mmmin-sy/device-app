@@ -1,13 +1,17 @@
 import styled, { css } from 'styled-components/macro';
 
-interface TableHeaderStyleProps{
+interface TableHeaderStyleProps {
     columns: number;
     columnsPercentage: number;
 }
 
-interface RowStyleProps{
+interface RowStyleProps {
     columns: number;
     columnsPercentage: number;
+}
+
+interface CellStyleProps {
+    align?: string;
 }
 
 export const Table = styled.div`
@@ -18,7 +22,7 @@ export const Table = styled.div`
 export const TableBody = styled.div`
 `;
 
-export const TableHaeder = styled.div<TableHeaderStyleProps>`
+export const TableHeader = styled.div<TableHeaderStyleProps>`
     font-weight: bold;
     ${({ columns, columnsPercentage }) => css`
         display: grid;
@@ -33,12 +37,23 @@ export const Row = styled.div<RowStyleProps>`
     `}
 `;
 
-export const Cell = styled.div`
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
+export const Cell = styled.div<CellStyleProps>`
+    ${({ align }) => css`
+        position: relative;
+        padding: 5px;
+
+        ${align && css`
+            text-align: ${align};
+        `}        
+    `}
 `;
 
 export const Sort = styled.a`
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+`;
+
+export const Link = styled.a`
     cursor: pointer;
 `;
