@@ -19,13 +19,13 @@ const Row = ({ id, rowData, hasEdit = false, hasDelete = false, rowGridColumns, 
         <Styled.Row gridTemplateColumns={rowGridColumns}>
             {values.map((cell, idx) => <Styled.Cell key={idx}>{cell}</Styled.Cell>)}
             {hasEdit && (
-                <Styled.Cell align='center'>
+                <Styled.Cell justifyContent="flex-end">
                     <Styled.Link onClick={() => toggleModal && toggleModal(id)}><AiFillEdit /></Styled.Link>
                 </Styled.Cell>
             )}
 
             {hasDelete && (
-                <Styled.Cell align='center'>
+                <Styled.Cell justifyContent="flex-end">
                     <Styled.Link onClick={() => onDeleteRow && onDeleteRow(id)}><AiFillDelete /></Styled.Link>
                 </Styled.Cell>
             )}

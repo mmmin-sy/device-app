@@ -5,7 +5,8 @@ interface RowStyleProps {
 }
 
 interface CellStyleProps {
-    align?: string;
+    textAlign?: string;
+    justifyContent?: 'flex-start' | 'center' | 'flex-end';
 }
 
 export const Table = styled.div`
@@ -35,15 +36,18 @@ export const Row = styled.div<RowStyleProps>`
 `;
 
 export const Cell = styled.div<CellStyleProps>`
-    ${({ align }) => css`
+    ${({ textAlign, justifyContent }) => css`
         display: flex;
         align-items: center;
         position: relative;
         padding: 10px 5px;
         word-break: break-all;
-        ${align && css`
-            text-align: ${align};
+        ${textAlign && css`
+            text-align: ${textAlign};
         `}        
+        ${justifyContent && css`
+            justify-content: ${justifyContent};
+        `}
     `}
 `;
 
