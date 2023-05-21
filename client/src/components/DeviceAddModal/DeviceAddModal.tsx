@@ -15,6 +15,10 @@ const DeviceAddModal = ({ toggleModal, onAddItem }: DeviceAddModalProps) => {
     const [batteryStatus, setBatterStatus] = useState<any>();
     const ref = useRef<any>();
 
+    useEffect(() => {
+        setHeight(ref?.current.offsetHeight)
+    }, [ref]);
+
     const onSave = () => {
         const newData = {
             deviceName: deviceName ?? '',
@@ -25,10 +29,6 @@ const DeviceAddModal = ({ toggleModal, onAddItem }: DeviceAddModalProps) => {
 
         onAddItem(newData);
     }
-
-    useEffect(() => {
-        setHeight(ref?.current.offsetHeight)
-    }, [ref]);
 
     return (
         <Styled.Container>
@@ -53,7 +53,12 @@ const DeviceAddModal = ({ toggleModal, onAddItem }: DeviceAddModalProps) => {
                     </Styled.Form>
                     <Styled.Form>
                         <Styled.Label>Batter Status</Styled.Label>
-                        <Input value={batteryStatus} onChange={(event) => setBatterStatus(event.target.value)} />
+                        <Input 
+                            value={batteryStatus} 
+                            onChange={(event) => setBatterStatus(event.target.value)}
+                            validateRule="^[0-9]+$" 
+                            errorMessege="Please enter only number."  
+                        />
                     </Styled.Form>
                 </div>
             </Modal>
