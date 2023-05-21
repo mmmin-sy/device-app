@@ -112,14 +112,10 @@ const DeviceList = () => {
 						<Table 
 							rows={data} 
 							headers={['Id', 'Device Name', 'Device Type', 'Owner Name', 'Batter Status']} 
-							hasSort 
-							hasEdit 
-							hasDelete 
 							toggleModal={(toggle: number | null) => setOpenEditModal(toggle)}
 							onDeleteRow={deleteDevice}
 							onSorting={(idx: number, ascending: boolean) => onSorting(idx, ascending)}
 							currentAscendingIndex={currentAscendingIndex}
-							rowGridColumns='10% 20% 20% 20% 20% 5% 5%'
 						/>
 					) 
                     : 'No device item'
