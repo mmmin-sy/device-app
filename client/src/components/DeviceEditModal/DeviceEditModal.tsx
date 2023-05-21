@@ -66,7 +66,7 @@ const DeviceEditModal = ({ toggleModal, data, onEditItem }: DeviceEditModalProps
                             value={batteryStatus} 
                             onChange={(event) => setBatterStatus(event.target.value)} 
                             validateRule="^[0-9]+$" 
-                            errorMessege="Please enter only number." 
+                            errorMessage="Please enter only number." 
                         />
                     </Styled.Form>
                 </div>

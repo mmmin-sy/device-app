@@ -54,10 +54,13 @@ const DeviceAddModal = ({ toggleModal, onAddItem }: DeviceAddModalProps) => {
                     <Styled.Form>
                         <Styled.Label>Batter Status</Styled.Label>
                         <Input 
+                            type="number"
                             value={batteryStatus} 
                             onChange={(event) => setBatterStatus(event.target.value)}
                             validateRule="^[0-9]+$" 
-                            errorMessege="Please enter only number."  
+                            min={0}
+                            max={100}
+                            errorMessage="Please enter only number."  
                         />
                     </Styled.Form>
                 </div>

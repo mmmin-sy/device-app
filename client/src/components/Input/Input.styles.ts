@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
 `;
 
 export const Input = styled.input`
