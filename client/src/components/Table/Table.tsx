@@ -8,6 +8,7 @@ interface TableProps {
     hasSort?: boolean;
     hasEdit?: boolean;
     hasDelete?: boolean;
+    rowGridColumns: string;
     toggleModal?: (toggle: number | null) => void;
     onDeleteRow?: (id: number) => void;
     onSorting?: (idx: number, ascending: boolean) => void;
@@ -20,12 +21,12 @@ const Table = ({
     hasSort = false, 
     hasEdit = false, 
     hasDelete = false, 
+    rowGridColumns,
     toggleModal, 
     onDeleteRow, 
     onSorting, 
     currentAscendingIndex 
 }: TableProps) => {
-    console.log('##rows##', rows, headers)
     return (
         <Styled.Table>
             <TableHeader 
@@ -35,6 +36,7 @@ const Table = ({
                 hasDelete={hasDelete} 
                 onSorting={(idx: number, ascending: boolean) => onSorting && onSorting(idx, ascending)}
                 currentAscendingIndex={currentAscendingIndex}
+                rowGridColumns={rowGridColumns}
             />
 
             <Styled.TableBody>
@@ -47,6 +49,7 @@ const Table = ({
                         hasDelete={hasDelete} 
                         toggleModal={(toggle) => toggleModal && toggleModal(toggle)}
                         onDeleteRow={(id) => onDeleteRow && onDeleteRow(id)}
+                        rowGridColumns={rowGridColumns}
                     />
                 ))}
             </Styled.TableBody>

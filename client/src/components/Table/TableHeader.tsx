@@ -6,17 +6,14 @@ interface TableHeader {
     hasSort?: boolean;
     hasEdit?: boolean;
     hasDelete?: boolean;
+    rowGridColumns: string;
     onSorting?: (index: number, ascending: boolean) => void;
     currentAscendingIndex?: number | null;
 }
 
-const TableHeader = ({ data, hasSort = false, hasEdit = false, hasDelete = false, onSorting, currentAscendingIndex}: TableHeader) => {
-    let columnCount = Math.floor(data.length);
-    columnCount = hasEdit ? columnCount + 1 : columnCount;
-    columnCount = hasDelete ? columnCount + 1 : columnCount;
-
+const TableHeader = ({ data, hasSort = false, hasEdit = false, hasDelete = false, rowGridColumns, onSorting, currentAscendingIndex}: TableHeader) => {
     return (
-        <Styled.TableHeader columns={columnCount} columnsPercentage={100/columnCount}>
+        <Styled.TableHeader gridTemplateColumns={rowGridColumns}>
             {data.map((item, idx) => 
                 <TableHeaderCell 
                     key={idx}

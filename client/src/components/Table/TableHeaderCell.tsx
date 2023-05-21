@@ -35,12 +35,12 @@ const TableHeaderCell = ({ index, item, hasSort, onSorting, currentAscendingInde
 
     return (
         <Styled.Cell>
-            {item}
+            <span>{item}</span>
             {hasSort && 
                 <Styled.Sort onClick={() =>sorting(index)}>
-                    {!activeSorting && <BiSortAlt2 color='#a1a1a1' />}
-                    {activeSorting && ascending && <BiSortUp />}                            
-                    {activeSorting && !ascending && <BiSortDown />}                            
+                    {!activeSorting && <BiSortAlt2 color='#a1a1a1' fontSize={20} />}
+                    {activeSorting && ascending && <BiSortUp fontSize={20} />}                            
+                    {activeSorting && !ascending && <BiSortDown fontSize={20} />}                            
                 </Styled.Sort>
             }
         </Styled.Cell>
