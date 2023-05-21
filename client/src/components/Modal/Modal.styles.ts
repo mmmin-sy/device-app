@@ -21,7 +21,7 @@ export const Modal = styled.div<ModalStyleProps>`
     ${({ width, height, modalPositionLeft, modalPositionTop }) => css`
         position: fixed;
         width: ${width}px;
-        height: ${height}px;
+        
         padding: 25px 20px;
 
         margin-left: ${modalPositionLeft}px;
@@ -50,4 +50,5 @@ export const Bottom = styled.div`
 export const ButtonWrap = styled.div`
     display: flex;
     justify-content: space-evenly;
+    margin-top: 25px;
 `;

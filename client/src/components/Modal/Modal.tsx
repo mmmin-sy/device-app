@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import * as Styled from './Modal.styles';
 import Button from '../Button/Button';
 
@@ -28,7 +29,6 @@ const Modal = ({ width, height, onCancle, onSave, children }: ModalProps) => {
                         <Button onClick={() => onSave && onSave()} primary>Save</Button>
                     </Styled.ButtonWrap>
                 </Styled.ContentWrap>
-                
             </Styled.Modal>
         </Styled.Container>
     );

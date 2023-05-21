@@ -8,7 +8,7 @@ export const Layout = styled.div`
 
 export const Header = styled.div`
     font-weight: bold;
-    
+    padding: 0 20px;
 `;
 
 export const Content = styled.div`
