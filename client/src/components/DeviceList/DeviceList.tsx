@@ -4,6 +4,7 @@ import Table from '../Table/Table';
 import { getList, addItem, deleteItem, updateItem } from './../../api/DeviceApi';
 import DeviceEditModal from '../DeviceEditModal/DeviceEditModal';
 import DeviceAddModal from '../DeviceAddModal/DeviceAddModal';
+import Button from '../Button/Button';
 
 export interface DeviceType {
 	id: number;
@@ -101,8 +102,6 @@ const DeviceList = () => {
 		if (!ascending){
 			data.reverse();
 		} 
-		console.log('#', data)
-		
 	}
 
     return (
@@ -127,7 +126,7 @@ const DeviceList = () => {
             </div>
 
 			{error && <span>Error!</span>}	
-            <button onClick={() => setOpenAddModal(true)}>New Device</button>
+            <Button onClick={() => setOpenAddModal(true)}>New Device</Button>
 
 			{openAddModal && (
 				<DeviceAddModal 

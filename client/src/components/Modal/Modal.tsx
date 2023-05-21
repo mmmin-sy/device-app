@@ -1,4 +1,5 @@
 import * as Styled from './Modal.styles';
+import Button from '../Button/Button';
 
 interface ModalProps {
     width: number;
@@ -23,8 +24,8 @@ const Modal = ({ width, height, onCancle, onSave, children }: ModalProps) => {
                 <Styled.ContentWrap>
                     <Styled.Content>{children}</Styled.Content>               
                     <Styled.ButtonWrap>
-                        <Styled.Button onClick={() => onCancle()}>Close</Styled.Button>
-                        <Styled.Button onClick={() => onSave && onSave()}>Save</Styled.Button>
+                        <Button onClick={() => onCancle()} secondary>Close</Button>
+                        <Button onClick={() => onSave && onSave()} primary>Save</Button>
                     </Styled.ButtonWrap>
                 </Styled.ContentWrap>
                 
