@@ -1,11 +1,18 @@
 const express = require("express");
+const mysql      = require('mysql2');
+const dbconfig = require('./config/db');
+const connection = mysql.createConnection(dbconfig);
 
-const PORT = process.env.PORT || 3001;
+//const PORT = process.env.PORT || 3001;
 const app = express();
+app.set('port', process.env.PORT || 3001);
+
+connection.connect();
+  
 
 //body parser
 app.use(express.json());
-
+/*
 app.locals.data = [
     {
         id: 0,
@@ -15,41 +22,48 @@ app.locals.data = [
         batteryStatus: 80
     }
 ];
-
-app.get('/api', (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
+*/
 
 app.get('/api/device', (req, res) => {
-    res.json(app.locals.data);
+    connection.query('SELECT * from devices', (error, rows) => {
+        if (error) throw error;
+        res.json(rows);
+    });
 });
 
 app.post('/api/device', (req, res) => {
-    app.locals.data = [...app.locals.data, req.body];
-    res.json(app.locals.data);
+    const deviceName = req.body.device_name;
+    const deviceType = req.body.device_type;
+    const ownerName = req.body.owner_name;
+    const batteryStatus = req.body.battery_status;
+    const query = `INSERT INTO devices (device_name, device_type, owner_name, battery_status) VALUES('${deviceName}','${deviceType}','${ownerName}',${batteryStatus})`;
+    
+    connection.query(query, (error, rows) => {
+        if (error) throw error;
+        res.json(rows);
+    });
 });
 
 app.put('/api/device/:id', (req, res) => {
-    const data = app.locals.data;
-    const index = data.findIndex(item => item.id === parseInt(req.params.id));
-
-    if(index < 0) {
-        res.status(400).json({ message: 'There is no item'})
-    } else {
-        data.splice(index, 1, req.body);
-        app.locals.data = [...data];
-    }
-    res.json(app.locals.data);
+    const deviceName = req.body.device_name;
+    const deviceType = req.body.device_type;
+    const ownerName = req.body.owner_name;
+    const batteryStatus = req.body.battery_status;
+    const query = `UPDATE devices SET device_name='${deviceName}', device_type='${deviceType}', owner_name='${ownerName}', battery_status=${batteryStatus} WHERE id = ${req.params.id}`;
+    connection.query(query, (error, rows) => {
+        if (error) throw error;
+        res.json(rows);
+    });
 })
 
 app.delete('/api/device/:id', (req, res) => {
-    const data = app.locals.data;
-    const newData = data.filter(item => item.id !== parseInt(req.params.id));
-        app.locals.data = [...newData];
-
-        res.json(app.locals.data);
+    const query = `DELETE FROM devices WHERE id = ${req.params.id}`;
+    connection.query(query, (error, rows) => {
+        if (error) throw error;
+        res.json(rows);
+    });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+app.listen(app.get('port'), () => {
+    console.log('Express server listening on port ' + app.get('port'));
 });
