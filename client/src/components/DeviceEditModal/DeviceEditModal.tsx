@@ -26,10 +26,10 @@ const DeviceEditModal = ({ toggleModal, data, onEditItem }: DeviceEditModalProps
     const onEdit = () => {
         const updatedData = {
 			id: data[0],
-			deviceName: deviceName,
-			deviceType: deviceType,
-            ownerName: ownerName,
-			batteryStatus: batteryStatus
+			device_name: deviceName,
+			device_type: deviceType,
+            owner_name: ownerName,
+			battery_status: batteryStatus
 		}
         onEditItem(updatedData);
     }
