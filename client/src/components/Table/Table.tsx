@@ -8,7 +8,8 @@ interface TableProps {
     toggleModal: (toggle: number | null) => void;
     onDeleteRow: (id: number) => void;
     onSorting: (idx: number, ascending: boolean) => void;
-    currentAscendingIndex?: number | null;
+    currentAscending?: boolean | null;
+    currentAscendingIndex?: number | null;    
 }
 
 const Table = ({ 
@@ -17,6 +18,7 @@ const Table = ({
     toggleModal, 
     onDeleteRow, 
     onSorting, 
+    currentAscending,
     currentAscendingIndex 
 }: TableProps) => {
     return (

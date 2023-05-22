@@ -3,7 +3,6 @@ import TableHeaderCell from './TableHeaderCell';
 
 interface TableHeader {
     data: string[];
-    hasDelete?: boolean;
     onSorting: (index: number, ascending: boolean) => void;
     currentAscendingIndex?: number | null;
 }

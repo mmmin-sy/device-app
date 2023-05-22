@@ -5,12 +5,11 @@ import { BiSortAlt2, BiSortDown, BiSortUp } from 'react-icons/bi';
 interface TableHeaderCellProps {
     index: number;
     item: any;
-    hasSort?: boolean;
-    onSorting?: (index: number, ascending: boolean) => void;
+    onSorting: (index: number, ascending: boolean) => void;
     currentAscendingIndex?: number | null;
 }
 
-const TableHeaderCell = ({ index, item, hasSort, onSorting, currentAscendingIndex }: TableHeaderCellProps) => {
+const TableHeaderCell = ({ index, item, onSorting, currentAscendingIndex }: TableHeaderCellProps) => {
     const [ascending, setAscending] = useState<boolean>(false);
     const [activeSorting, setActiveSorting] = useState<boolean>(false);
 
@@ -36,13 +35,11 @@ const TableHeaderCell = ({ index, item, hasSort, onSorting, currentAscendingInde
     return (
         <Styled.Cell>
             <span>{item}</span>
-            {hasSort && 
-                <Styled.Sort onClick={() =>sorting(index)}>
-                    {!activeSorting && <BiSortAlt2 color='#a1a1a1' fontSize={20} />}
-                    {activeSorting && ascending && <BiSortUp fontSize={20} />}                            
-                    {activeSorting && !ascending && <BiSortDown fontSize={20} />}                            
-                </Styled.Sort>
-            }
+            <Styled.Sort onClick={() =>sorting(index)}>
+                {!activeSorting && <BiSortAlt2 color='#a1a1a1' fontSize={20} />}
+                {activeSorting && ascending && <BiSortUp fontSize={20} />}                            
+                {activeSorting && !ascending && <BiSortDown fontSize={20} />}                            
+            </Styled.Sort>
         </Styled.Cell>
     );
 }
