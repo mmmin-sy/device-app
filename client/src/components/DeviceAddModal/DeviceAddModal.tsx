@@ -45,7 +45,11 @@ const DeviceAddModal = ({ toggleModal, onAddItem }: DeviceAddModalProps) => {
                     </Styled.Form>
                     <Styled.Form>
                         <Styled.Label>Device Type</Styled.Label>
-                        <Input value={deviceType} onChange={(event) => setDeviceType(event.target.value)} />
+                        <select onChange={(event) => setDeviceType(event.target.value)}>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Camera">Camera</option>
+                            <option value="Smartphone">Smartphone</option>
+                        </select>
                     </Styled.Form>
                     <Styled.Form>
                         <Styled.Label>Owner Name</Styled.Label>
