@@ -28,6 +28,7 @@ const DeviceList = () => {
 	const [openEditModal, setOpenEditModal] = useState<number | null>(null);
 	const [currentAscending, setCurrentAscending] = useState<boolean | null>(null);
 	const [currentAscendingIndex, setCurrentAscendingIndex] = useState<number | null>(null);
+	const xhr = new XMLHttpRequest();
 
 	useEffect(() => {
 		getDeviceList();
@@ -35,7 +36,10 @@ const DeviceList = () => {
 
 	const getDeviceList = () => {
 		getList()
-		.then(data => setData(data))
+		.then(data => {
+			
+			setData(data)
+		})
 		.catch(error => setError(error))
 	}
 
@@ -47,13 +51,13 @@ const DeviceList = () => {
 			deviceName: newData.deviceName,
 			deviceType: newData.deviceType,
 			ownerName: newData.ownerName,
-
 			batteryStatus: newData.batteryStatus
 		})
 		.then(data => {
-			setData(data)
-			setOpenAddModal(false)
-		});
+			getDeviceList();
+			setOpenAddModal(false);
+		})
+		.catch(error => setError(error))
 	}
 	
 	const editDevice = (updateData: DeviceType) => {		
@@ -62,8 +66,8 @@ const DeviceList = () => {
 		if(availableData) {
 			updateItem(updateData)
 			.then(data => {
-				setData(data)
-				setOpenEditModal(null)
+				getDeviceList();
+				setOpenEditModal(null);
 			})
 			.catch(error => setError(error));
 		}
@@ -71,7 +75,9 @@ const DeviceList = () => {
 
 	const deleteDevice = (id: number) => {
 		deleteItem(id)
-		.then(data => setData(data));
+		.then(data => getDeviceList())
+		.catch(error => setError(error));
+
 	}
 
 	const getRowValues = (id: number) => {
@@ -81,8 +87,8 @@ const DeviceList = () => {
 	}
 
 	const onSorting = (index: number, ascending: boolean) => {
-		setCurrentAscending(ascending);
 		setCurrentAscendingIndex(index);
+		setCurrentAscending(ascending);
 
 		const sampleObj = data[0];
 		const sortingKey = Object.keys(sampleObj)[index];
@@ -116,6 +122,7 @@ const DeviceList = () => {
 							onDeleteRow={deleteDevice}
 							onSorting={(idx: number, ascending: boolean) => onSorting(idx, ascending)}
 							currentAscendingIndex={currentAscendingIndex}
+							currentAscending={currentAscending}
 						/>
 					) 
                     : 'No device item'

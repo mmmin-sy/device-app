@@ -12,22 +12,12 @@ connection.connect();
 
 //body parser
 app.use(express.json());
-/*
-app.locals.data = [
-    {
-        id: 0,
-        deviceName: 'Samsung G',
-        deviceType: 'Tablet',
-        ownerName: 'Tom',
-        batteryStatus: 80
-    }
-];
-*/
 
 app.get('/api/device', (req, res) => {
     connection.query('SELECT * from devices', (error, rows) => {
         if (error) throw error;
-        res.json(rows);
+        const newRows = rows.map(row => { return { id: row.id, deviceName: row.device_name, deviceType: row.device_type, ownerName: row.owner_name, batteryStatus: row.battery_status}})
+        res.json(newRows);
     });
 });
 

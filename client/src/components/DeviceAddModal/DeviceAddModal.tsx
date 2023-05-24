@@ -21,10 +21,10 @@ const DeviceAddModal = ({ toggleModal, onAddItem }: DeviceAddModalProps) => {
 
     const onSave = () => {
         const newData = {
-            device_name: deviceName ?? '',
-			device_type: deviceType ?? 'Tablet',
-            owner_name: ownerName ?? '',
-			battery_status: batteryStatus ?? 0
+            deviceName: deviceName ?? '',
+			deviceType: deviceType ?? 'Tablet',
+            ownerName: ownerName ?? '',
+			batteryStatus: batteryStatus ?? 0
         }
 
         onAddItem(newData);
