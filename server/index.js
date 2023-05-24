@@ -22,10 +22,10 @@ app.get('/api/device', (req, res) => {
 });
 
 app.post('/api/device', (req, res) => {
-    const deviceName = req.body.device_name;
-    const deviceType = req.body.device_type;
-    const ownerName = req.body.owner_name;
-    const batteryStatus = req.body.battery_status;
+    const deviceName = req.body.deviceName;
+    const deviceType = req.body.deviceType;
+    const ownerName = req.body.ownerName;
+    const batteryStatus = req.body.batteryStatus;
     const query = `INSERT INTO devices (device_name, device_type, owner_name, battery_status) VALUES('${deviceName}','${deviceType}','${ownerName}',${batteryStatus})`;
     
     connection.query(query, (error, rows) => {
@@ -35,10 +35,10 @@ app.post('/api/device', (req, res) => {
 });
 
 app.put('/api/device/:id', (req, res) => {
-    const deviceName = req.body.device_name;
-    const deviceType = req.body.device_type;
-    const ownerName = req.body.owner_name;
-    const batteryStatus = req.body.battery_status;
+    const deviceName = req.body.deviceName;
+    const deviceType = req.body.deviceType;
+    const ownerName = req.body.ownerName;
+    const batteryStatus = req.body.batteryStatus;
     const query = `UPDATE devices SET device_name='${deviceName}', device_type='${deviceType}', owner_name='${ownerName}', battery_status=${batteryStatus} WHERE id = ${req.params.id}`;
     connection.query(query, (error, rows) => {
         if (error) throw error;

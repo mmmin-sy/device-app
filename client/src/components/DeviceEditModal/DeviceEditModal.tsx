@@ -3,6 +3,7 @@ import * as Styled from './DeviceEditModal.styles';
 import Modal from '../Modal/Modal';
 import { DeviceType } from '../DeviceList/DeviceList';
 import Input from '../Input/Input';
+import SelectBox from '../SelectBox/SelectBox';
 
 interface DeviceEditModalProps {
     data: any[];
@@ -54,11 +55,11 @@ const DeviceEditModal = ({ toggleModal, data, onEditItem }: DeviceEditModalProps
                     </Styled.Form>
                     <Styled.Form>
                         <Styled.Label>Device Type</Styled.Label>
-                        <select onChange={(event) => setDeviceType(event.target.value)}>
-                            <option selected={deviceType==="Tablet"} value="Tablet">Tablet</option>
-                            <option selected={deviceType==="Camera"} value="Camera">Camera</option>
-                            <option selected={deviceType==="Smartphone"} value="Smartphone">Smartphone</option>
-                        </select>
+                        <SelectBox 
+                            options={['Tablet', 'Camera', 'Smartphone']}
+                            onChange={(event) => setDeviceType(event.target.value)} 
+                            selectedValue={deviceType}
+                        />
                     </Styled.Form>
                     <Styled.Form>
                         <Styled.Label>Owner Name</Styled.Label>
