@@ -44,7 +44,6 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-    console.log(req.params.id )
     Device.destroy({ where: { id: req.params.id }})
     .then(num => {
         if (num == 1) {

@@ -13,7 +13,7 @@ export const Table = styled.div`
 export const TableHeader = styled.div`
     font-weight: bold;
     display: grid;
-    grid-template-columns: 0.4fr 2fr 1fr 2fr 0.4fr 40px 40px;
+    grid-template-columns: 0.4fr 2fr 1fr 2fr 0.5fr 40px 40px;
     border-bottom: 1px solid #c8c8c8;
     margin-top: 20px;
     background-color: #E6EFFF;
@@ -25,7 +25,7 @@ export const TableBody = styled.div`
 
 export const Row = styled.div`
     display: grid;
-    grid-template-columns: 0.4fr 2fr 1fr 2fr 0.4fr 40px 40px;
+    grid-template-columns: 0.4fr 2fr 1fr 2fr 0.5fr 40px 40px;
     border-bottom: 1px solid #c8c8c8;
 `;
 
@@ -35,7 +35,7 @@ export const Cell = styled.div<CellStyleProps>`
         align-items: center;
         position: relative;
         padding: 10px;
-        word-break: break-all;
+        word-break: break-word;
         ${textAlign && css`
             text-align: ${textAlign};
         `}        

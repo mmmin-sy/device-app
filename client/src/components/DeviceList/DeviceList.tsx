@@ -124,24 +124,19 @@ const DeviceList = () => {
 		})
 		return newData;
 	}
-
+	console.log('#', data)
     return (
         <div className={Styled.Container}>			
             <div>
-                {data
-                    ? (
-						<Table 
-							rows={reformedData()} 
-							headers={['Id', 'Device Name', 'Device Type', 'Owner Name', 'Batter Status']}
-							toggleModal={(toggle: number | null) => setOpenEditModal(toggle)}
-							onDeleteRow={deleteDevice}
-							onSorting={(idx: number, ascending: boolean) => onSorting(idx, ascending)}
-							currentAscendingIndex={currentAscendingIndex}
-							currentAscending={currentAscending}
-						/>
-					) 
-                    : 'No device item'
-                }
+				<Table 
+					rows={reformedData()} 
+					headers={['Id', 'Device Name', 'Device Type', 'Owner Name', 'Batter Status']}
+					toggleModal={(toggle: number | null) => setOpenEditModal(toggle)}
+					onDeleteRow={deleteDevice}
+					onSorting={(idx: number, ascending: boolean) => onSorting(idx, ascending)}
+					currentAscendingIndex={currentAscendingIndex}
+					currentAscending={currentAscending}
+				/>
             </div>
 
 			{error && <span>Error!</span>}	
