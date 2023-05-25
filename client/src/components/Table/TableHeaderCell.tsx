@@ -33,7 +33,7 @@ const TableHeaderCell = ({ index, item, onSorting, currentAscendingIndex }: Tabl
     }
 
     return (
-        <Styled.Cell>
+        <Styled.Cell fontSize={13} justifyContent={typeof item === 'number' ? 'flex-end' : 'flex-start'}>
             <span>{item}</span>
             <Styled.Sort onClick={() =>sorting(index)}>
                 {!activeSorting && <BiSortAlt2 color='#a1a1a1' fontSize={20} />}

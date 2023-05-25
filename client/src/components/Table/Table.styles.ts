@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components/macro';
 
 interface CellStyleProps {
+    fontSize?: number;
     textAlign?: string;
     justifyContent?: 'flex-start' | 'center' | 'flex-end';
 }
@@ -12,9 +13,10 @@ export const Table = styled.div`
 export const TableHeader = styled.div`
     font-weight: bold;
     display: grid;
-    grid-template-columns: 10% 20% 20% 20% 20% 5% 5%;
+    grid-template-columns: 0.4fr 2fr 1fr 2fr 0.4fr 40px 40px;
     border-bottom: 1px solid #c8c8c8;
     margin-top: 20px;
+    background-color: #E6EFFF;
 `;
 
 export const TableBody = styled.div`
@@ -23,12 +25,12 @@ export const TableBody = styled.div`
 
 export const Row = styled.div`
     display: grid;
-    grid-template-columns: 10% 20% 20% 20% 20% 5% 5%;
+    grid-template-columns: 0.4fr 2fr 1fr 2fr 0.4fr 40px 40px;
     border-bottom: 1px solid #c8c8c8;
 `;
 
 export const Cell = styled.div<CellStyleProps>`
-    ${({ textAlign, justifyContent }) => css`
+    ${({ fontSize, textAlign, justifyContent }) => css`
         display: flex;
         align-items: center;
         position: relative;
@@ -39,6 +41,9 @@ export const Cell = styled.div<CellStyleProps>`
         `}        
         ${justifyContent && css`
             justify-content: ${justifyContent};
+        `}
+        ${fontSize && css`
+            font-size: ${fontSize}px;
         `}
     `}
 `;
