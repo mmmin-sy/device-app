@@ -8,9 +8,9 @@ interface SelectBoxProps {
 
 const SelectBox = ({ options, onChange, selectedValue }: SelectBoxProps) => {
     return (
-        <Styled.SelectBox onChange={onChange}>
-            {options.map(option => 
-                <Styled.Option selected={selectedValue===option} value={option}>
+        <Styled.SelectBox onChange={onChange} defaultValue={selectedValue}>
+            {options.map((option, key) => 
+                <Styled.Option key={key} value={option}>
                     {option}
                 </Styled.Option>
             )}

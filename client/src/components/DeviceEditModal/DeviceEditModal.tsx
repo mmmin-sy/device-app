@@ -7,7 +7,7 @@ import SelectBox from '../SelectBox/SelectBox';
 
 interface DeviceEditModalProps {
     data: any[];
-    toggleModal: (toggle: DeviceDetailType | null) => void;
+    toggleModal: (toggle: number | null) => void;
     onEditItem: (data: DeviceType) => void;
 }
 

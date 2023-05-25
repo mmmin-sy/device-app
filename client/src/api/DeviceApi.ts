@@ -14,6 +14,7 @@ export const addItem = (data: DeviceType) => {
 }
 
 export const deleteItem = (id: number)  => {
+    console.log(id)
     return axios.delete('/api/device/' + id)
     .then(data => data.data)
     .catch(error => error)

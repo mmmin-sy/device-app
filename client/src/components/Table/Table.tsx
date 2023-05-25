@@ -6,7 +6,7 @@ import { DeviceDetailType } from '../types';
 interface TableProps {
     rows: any[];
     headers: string[];
-    toggleModal: (toggle: DeviceDetailType | null) => void;
+    toggleModal: (toggle: number | null) => void;
     onDeleteRow: (id: number) => void;
     onSorting: (idx: number, ascending: boolean) => void;
     currentAscending?: boolean | null;
@@ -35,7 +35,7 @@ const Table = ({
                     <Row 
                         key={key}
                         rowData={row} 
-                        id={row.id} 
+                        id={row.id.value} 
                         toggleModal={(toggle) => toggleModal(toggle)}
                         onDeleteRow={(id) => onDeleteRow(id)}
                     />

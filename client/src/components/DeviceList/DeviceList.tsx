@@ -11,7 +11,7 @@ const DeviceList = () => {
     const [data, setData] = useState<DeviceType[]>([]);
 	const [error, setError] = useState(null);
 	const [openAddModal, setOpenAddModal] = useState<boolean>(false);
-	const [openEditModal, setOpenEditModal] = useState<DeviceDetailType | null>(null);
+	const [openEditModal, setOpenEditModal] = useState<number | null>(null);
 	const [currentAscending, setCurrentAscending] = useState<boolean | null>(null);
 	const [currentAscendingIndex, setCurrentAscendingIndex] = useState<number | null>(null);
 
@@ -65,9 +65,9 @@ const DeviceList = () => {
 
 	}
 
-	const getRowValues = (id: DeviceDetailType) => {
-		const selectedId = id.value;
-		const row = data.find(item => item.id === id.value) ?? {};
+	const getRowValues = (id: number) => {
+		const selectedId = id;
+		const row = data.find(item => item.id === id) ?? {};
 		const values: (string|number)[] = Object.values(row);
 		return  values;
 	}
@@ -133,7 +133,7 @@ const DeviceList = () => {
 						<Table 
 							rows={reformedData()} 
 							headers={['Id', 'Device Name', 'Device Type', 'Owner Name', 'Batter Status']}
-							toggleModal={(toggle: DeviceDetailType | null) => setOpenEditModal(toggle)}
+							toggleModal={(toggle: number | null) => setOpenEditModal(toggle)}
 							onDeleteRow={deleteDevice}
 							onSorting={(idx: number, ascending: boolean) => onSorting(idx, ascending)}
 							currentAscendingIndex={currentAscendingIndex}
@@ -157,7 +157,7 @@ const DeviceList = () => {
 			{openEditModal !== null && data && (
 				<DeviceEditModal 
 					data={getRowValues(openEditModal)}
-					toggleModal={(toggle: DeviceDetailType | null) => setOpenEditModal(toggle)} 
+					toggleModal={(toggle: number | null) => setOpenEditModal(toggle)} 
 					onEditItem={editDevice}
 				/>
 			)}

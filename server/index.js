@@ -1,18 +1,30 @@
 const express = require("express");
+const cors = require("cors");
 const mysql      = require('mysql2');
 const dbconfig = require('./config/db');
-const connection = mysql.createConnection(dbconfig);
+//const connection = mysql.createConnection(dbconfig);
 
-//const PORT = process.env.PORT || 3001;
 const app = express();
-app.set('port', process.env.PORT || 3001);
-
-connection.connect();
-  
-
+var corsOptions = {
+    origin: "http://localhost:3000"
+};
+app.use(cors(corsOptions));
 //body parser
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+const db = require('./models');
+db.sequelize.sync({ force: false }).then(() => {
+    console.log('Drop and re-sync db.');
+});
+
+require('./routes/device.routes')(app);
+
+app.set('port', process.env.PORT || 3001);
+
+/*
+connection.connect();
+  
 app.get('/api/device', (req, res) => {
     connection.query('SELECT * from devices', (error, rows) => {
         if (error) throw error;
@@ -53,7 +65,7 @@ app.delete('/api/device/:id', (req, res) => {
         res.json(rows);
     });
 });
-
+*/
 app.listen(app.get('port'), () => {
     console.log('Express server listening on port ' + app.get('port'));
 });

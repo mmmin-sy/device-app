@@ -5,7 +5,7 @@ import { ReformedDeviceDataType, DeviceDetailType } from '../types';
 interface RowProps {
     id: number;
     rowData: ReformedDeviceDataType;
-    toggleModal: (toggle: DeviceDetailType | null) => void;
+    toggleModal: (toggle: number | null) => void;
     onDeleteRow: (id: number) => void;
 }
 
@@ -23,7 +23,7 @@ const Row = ({ id, rowData, onDeleteRow, toggleModal }: RowProps) => {
                 </Styled.Cell>
             )}
             <Styled.Cell justifyContent="flex-end">
-                <Styled.Link onClick={() => toggleModal(rowData.id)}><AiFillEdit /></Styled.Link>
+                <Styled.Link onClick={() => toggleModal(rowData.id.value as number)}><AiFillEdit /></Styled.Link>
             </Styled.Cell>
 
             <Styled.Cell justifyContent="flex-end">
