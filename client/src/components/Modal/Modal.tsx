@@ -11,8 +11,20 @@ interface ModalProps {
 }
 
 const Modal = ({ width, height, onCancle, onSave, children }: ModalProps) => {
-    const modalPositionLeft = (document.documentElement.clientWidth * 0.5) - (width * 0.5);
-    const modalPositionTop = (document.documentElement.clientHeight * 0.5) - (height * 0.5);
+    const [screenWidth, setScreenWidth] = useState<number>(document.documentElement.clientWidth);
+    const [screenHeight, setScreenHeight] = useState<number>(document.documentElement.clientHeight);
+    const modalPositionLeft = (screenWidth * 0.5) - (width * 0.5);
+    const modalPositionTop = (screenHeight * 0.5) - (height * 0.5);
+
+    useEffect(() => {
+        window.addEventListener('resize', updateScreenSize);
+        return () => window.removeEventListener('resize', updateScreenSize);
+    }, []);
+
+    const updateScreenSize = () => {
+        setScreenWidth(document.documentElement.clientWidth); 
+        setScreenHeight(document.documentElement.clientHeight); 
+    }
 
     return (
         <Styled.Container>
