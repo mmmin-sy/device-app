@@ -15,7 +15,7 @@ interface InputProps {
 }
 
 const Input = ({ type = 'text', value, disabled, min, minLength, max, maxLength, errorMessage, validateRule, onChange }: InputProps) => {
-    const [inputValue, setInputValue] = useState(value);
+    const [inputValue, setInputValue] = useState(value ?? '');
     const [error, setError] = useState(false);
     const [currentErrorMessage, setCurrentErrorMessage] = useState(errorMessage);
 

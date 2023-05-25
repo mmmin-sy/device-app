@@ -124,7 +124,7 @@ const DeviceList = () => {
 		})
 		return newData;
 	}
-	console.log('#', data)
+
     return (
         <div className={Styled.Container}>			
             <div>
