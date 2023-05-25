@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DeviceType } from '../components/DeviceList/DeviceList';
+import { DeviceType } from '../components/types';
 
 export const getList = () => {
     return axios.get('/api/device')

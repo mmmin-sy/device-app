@@ -1,22 +1,29 @@
 import * as Styled from './Table.styles';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import { ReformedDeviceDataType, DeviceDetailType } from '../types';
 
 interface RowProps {
     id: number;
-    rowData: object;
-    title: string[];
-    toggleModal: (toggle: number | null) => void;
+    rowData: ReformedDeviceDataType;
+    toggleModal: (toggle: DeviceDetailType | null) => void;
     onDeleteRow: (id: number) => void;
 }
 
 const Row = ({ id, rowData, onDeleteRow, toggleModal }: RowProps) => {
-    const values = Object.values(rowData);
+    const row: DeviceDetailType[] = Object.values(rowData);
 
     return (
         <Styled.Row>
-            {values.map((cell, idx) => <Styled.Cell key={idx}>{cell}</Styled.Cell>)}
+            {row.map((cell, idx) => 
+                <Styled.Cell 
+                    key={idx} 
+                    justifyContent={cell.type === 'number' ? 'flex-end' : 'flex-start'}
+                >
+                    {cell.value}{cell.subfix}
+                </Styled.Cell>
+            )}
             <Styled.Cell justifyContent="flex-end">
-                <Styled.Link onClick={() => toggleModal(id)}><AiFillEdit /></Styled.Link>
+                <Styled.Link onClick={() => toggleModal(rowData.id)}><AiFillEdit /></Styled.Link>
             </Styled.Cell>
 
             <Styled.Cell justifyContent="flex-end">

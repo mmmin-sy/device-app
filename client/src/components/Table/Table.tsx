@@ -1,11 +1,12 @@
 import * as Styled from './Table.styles';
 import Row from './Row';
 import TableHeader from './TableHeader';
+import { DeviceDetailType } from '../types';
 
 interface TableProps {
     rows: any[];
     headers: string[];
-    toggleModal: (toggle: number | null) => void;
+    toggleModal: (toggle: DeviceDetailType | null) => void;
     onDeleteRow: (id: number) => void;
     onSorting: (idx: number, ascending: boolean) => void;
     currentAscending?: boolean | null;
@@ -30,10 +31,10 @@ const Table = ({
             />
 
             <Styled.TableBody>
-                {rows.map(row => (
+                {rows.map((row, key) => (
                     <Row 
+                        key={key}
                         rowData={row} 
-                        title={headers}
                         id={row.id} 
                         toggleModal={(toggle) => toggleModal(toggle)}
                         onDeleteRow={(id) => onDeleteRow(id)}

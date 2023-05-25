@@ -32,7 +32,7 @@ export const Cell = styled.div<CellStyleProps>`
         display: flex;
         align-items: center;
         position: relative;
-        padding: 10px 5px;
+        padding: 10px;
         word-break: break-all;
         ${textAlign && css`
             text-align: ${textAlign};

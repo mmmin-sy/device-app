@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import * as Styled from './DeviceEditModal.styles';
 import Modal from '../Modal/Modal';
-import { DeviceType } from '../DeviceList/DeviceList';
+import { DeviceType, DeviceDetailType } from '../types';
 import Input from '../Input/Input';
 import SelectBox from '../SelectBox/SelectBox';
 
 interface DeviceEditModalProps {
     data: any[];
-    toggleModal: (toggle: number | null) => void;
+    toggleModal: (toggle: DeviceDetailType | null) => void;
     onEditItem: (data: DeviceType) => void;
 }
 
