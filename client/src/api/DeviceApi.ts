@@ -1,27 +1,33 @@
 import axios from 'axios';
 import { DeviceType } from '../components/types';
 
+const http = axios.create({
+    baseURL: 'http://localhost:3001/api',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+});
+
 export const getList = () => {
-    return axios.get('/api/device')
+    return http.get('/device')
     .then(data => data.data)
     .catch(error => error)
 }
 
 export const addItem = (data: DeviceType) => {
-    return axios.post('/api/device', data)
+    return http.post('/device', data)
     .then(data => data.data)
     .catch(error => error)
 }
 
 export const deleteItem = (id: number)  => {
-    console.log(id)
-    return axios.delete('/api/device/' + id)
+    return http.delete('/device/' + id)
     .then(data => data.data)
     .catch(error => error)
 }
 
 export const updateItem = (data: DeviceType)  => {
-    return axios.put('/api/device/' + data.id, data)
+    return http.put('/device/' + data.id, data)
     .then(data => data.data)
     .catch(error => error);
 }
