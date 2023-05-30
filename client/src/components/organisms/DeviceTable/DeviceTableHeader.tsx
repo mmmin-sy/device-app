@@ -1,5 +1,5 @@
-import * as Styled from './Table.styles';
-import TableHeaderCell from './TableHeaderCell';
+import * as Styled from './DeviceTable.styles';
+import TableHeaderCell from './DeviceTableHeaderCell';
 
 interface TableHeader {
     data: string[];

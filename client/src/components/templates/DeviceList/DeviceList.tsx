@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import * as Styled from './DeviceList.styles';
-import Table from '../Table/Table';
-import { getList, addItem, deleteItem, updateItem } from './../../api/DeviceApi';
-import DeviceEditModal from '../DeviceEditModal/DeviceEditModal';
-import DeviceAddModal from '../DeviceAddModal/DeviceAddModal';
-import Button from '../Button/Button';
-import { DeviceType, DeviceDetailType, DeviceAddFormType, ReformedDeviceDataType } from '../types';
+import Table from '../../organisms/DeviceTable/DeviceTable';
+import { getList, addItem, deleteItem, updateItem } from '../../../api/DeviceApi';
+import DeviceEditModal from '../../organisms/DeviceEditModal/DeviceEditModal';
+import DeviceAddModal from '../../organisms/DeviceAddModal/DeviceAddModal';
+import Button from '../../atoms/Button/Button';
+import { 
+	DeviceType, 
+	DeviceAddFormType, 
+	ReformedDeviceDataType 
+} from '../../../types/device.type';
 
 const DeviceList = () => {
     const [data, setData] = useState<DeviceType[]>([]);

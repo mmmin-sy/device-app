@@ -1,6 +1,6 @@
-import * as Styled from './Table.styles';
+import * as Styled from './DeviceTable.styles';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
-import { ReformedDeviceDataType, DeviceDetailType } from '../types';
+import { ReformedDeviceDataType, DeviceDetailType } from '../../../types/device.type';
 
 interface RowProps {
     id: number;

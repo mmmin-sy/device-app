@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import * as Styled from './DeviceEditModal.styles';
-import Modal from '../Modal/Modal';
-import { DeviceType, DeviceDetailType } from '../types';
-import Input from '../Input/Input';
-import SelectBox from '../SelectBox/SelectBox';
+import Modal from '../../molecules/Modal/Modal';
+import { DeviceType, DeviceDetailType } from '../../../types/device.type';
+import Input from '../../atoms/Input/Input';
+import SelectBox from '../../atoms/SelectBox/SelectBox';
 
 interface DeviceEditModalProps {
     data: any[];

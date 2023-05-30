@@ -1,7 +1,7 @@
-import * as Styled from './Table.styles';
-import Row from './Row';
-import TableHeader from './TableHeader';
-import { DeviceDetailType } from '../types';
+import * as Styled from './DeviceTable.styles';
+import Row from './DeviceTableBodyRow';
+import TableHeader from './DeviceTableHeader';
+import { DeviceDetailType } from '../../../types/device.type';
 
 interface TableProps {
     rows: any[];

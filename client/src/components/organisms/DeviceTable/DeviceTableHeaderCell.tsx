@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import * as Styled from './Table.styles';
+import * as Styled from './DeviceTable.styles';
 import { BiSortAlt2, BiSortDown, BiSortUp } from 'react-icons/bi';
 
 interface TableHeaderCellProps {

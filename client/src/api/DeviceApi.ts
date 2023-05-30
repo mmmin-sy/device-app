@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DeviceType } from '../components/types';
+import { DeviceType } from '../types/device.type';
 
 const http = axios.create({
     baseURL: 'http://localhost:3001/api',

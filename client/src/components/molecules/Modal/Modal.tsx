@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as Styled from './Modal.styles';
-import Button from '../Button/Button';
+import Button from '../../atoms/Button/Button';
 
 interface ModalProps {
     width: number;

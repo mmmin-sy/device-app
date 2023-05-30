@@ -11,15 +11,15 @@ const GlobalStyle = createGlobalStyle`
 
     @font-face {
         font-family: "Roboto";
-        src: url(${require('../assets/fonts/Roboto-Regular.ttf')}) format("truetype");
+        src: url(${require('./fonts/Roboto-Regular.ttf')}) format("truetype");
     }
     @font-face {
         font-family: "RobotoMedium";
-        src: url(${require('../assets/fonts/Roboto-Medium.ttf')}) format("truetype");
+        src: url(${require('./fonts/Roboto-Medium.ttf')}) format("truetype");
     }
     @font-face {
         font-family: "RobotoBold";
-        src: url(${require('../assets/fonts/Roboto-Bold.ttf')}) format("truetype");
+        src: url(${require('./fonts/Roboto-Bold.ttf')}) format("truetype");
     }
 `;
 

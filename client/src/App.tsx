@@ -1,5 +1,5 @@
-import DeviceList from './components/DeviceList/DeviceList';
-import Layout from './components/Layout/Layout';
+import DeviceList from './components/templates/DeviceList/DeviceList';
+import Layout from './components/organisms/Layout/Layout';
 
 function App() {
 	return (
