@@ -8,8 +8,14 @@ const http = axios.create({
     }
 });
 
-export const getList = () => {
-    return http.get('/device')
+export const getList = (page: number, orderBy: string, order: string) => {
+    const params = {
+        page,
+        orderBy,
+        order
+    };
+
+    return http.get('/device', { params })
     .then(data => data.data)
     .catch(error => error)
 }

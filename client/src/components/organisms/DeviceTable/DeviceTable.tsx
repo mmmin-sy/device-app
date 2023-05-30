@@ -1,7 +1,6 @@
 import * as Styled from './DeviceTable.styles';
 import Row from './DeviceTableBodyRow';
 import TableHeader from './DeviceTableHeader';
-import { DeviceDetailType } from '../../../types/device.type';
 
 interface TableProps {
     rows: any[];
@@ -9,7 +8,6 @@ interface TableProps {
     toggleModal: (toggle: number | null) => void;
     onDeleteRow: (id: number) => void;
     onSorting: (idx: number, ascending: boolean) => void;
-    currentAscending?: boolean | null;
     currentAscendingIndex?: number | null;    
 }
 
@@ -19,7 +17,6 @@ const Table = ({
     toggleModal, 
     onDeleteRow, 
     onSorting, 
-    currentAscending,
     currentAscendingIndex 
 }: TableProps) => {
     return (

@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require('express').Router();
 
     router.post('/', devices.create);
-    router.get('/', devices.findAll);
+    router.get('/', devices.findAndCountAll);
     router.put('/:id', devices.update);
     router.delete('/:id', devices.delete);
     

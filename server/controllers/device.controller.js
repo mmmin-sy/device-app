@@ -17,8 +17,18 @@ exports.create = (req, res) => {
         }));
 };
 
-exports.findAll = (req, res) => {
-    Device.findAll()
+exports.findAndCountAll = (req, res) => {
+    const page = req.query.page;
+    const orderBy = req.query.orderBy;
+    const order = req.query.order;
+    const limit = 10;
+    const offset = (page - 1) * limit;
+
+    Device.findAndCountAll({
+      limit,
+      offset,
+      order: [[orderBy, order]]  
+    })
         .then(data => res.send(data))
         .catch(error => res.status(500).send({
             message: error.message || ''
