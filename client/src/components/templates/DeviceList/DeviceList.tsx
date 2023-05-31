@@ -160,11 +160,13 @@ const DeviceList = () => {
 				/>
 			)}
 
-			<Pagination 
-				totalCount={total}
-				currentPage={currentPage}
-				onChangePage={(page: number) => setCurrentPage(page)}
-			/>
+			{data.length > 0 && (
+				<Pagination 
+					totalCount={total}
+					currentPage={currentPage}
+					onChangePage={(page: number) => setCurrentPage(page)}
+				/>
+			)}
         </div>
     );
 }
