@@ -99,6 +99,9 @@ const DeviceList = () => {
 	}
 
 	const reformedData = (): ReformedDeviceDataType[] => {
+		if(!data) {
+			return []
+		}
 		const newData = data.map(item => {
 			return {
 				id: {

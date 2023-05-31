@@ -11,7 +11,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const db = require('./models');
-db.sequelize.sync({ force: false }).then(() => {
+const sampleData = require('./sampleData');
+
+db.sequelize.sync({ force: true }).then(() => {
+    sampleData.data.forEach(data =>
+        db.devices.create(data)
+    )
+    
     console.log('Drop and re-sync db.');
 });
 
