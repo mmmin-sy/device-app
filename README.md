@@ -15,6 +15,7 @@ docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=
 
 ```
 cd server 
+npm install
 npm start
 ```
 
@@ -22,6 +23,7 @@ npm start
 
 ```
 cd client 
+npm install
 npm start
 ```
 
