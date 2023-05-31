@@ -19,7 +19,7 @@ npm install
 npm start
 ```
 
-3. Frontend Start
+3. Frontend Start (In new Terminal)
 
 ```
 cd client 
