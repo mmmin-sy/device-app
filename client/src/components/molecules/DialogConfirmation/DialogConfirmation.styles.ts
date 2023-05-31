@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 
-interface ModalStyleProps {
-    width: number;
+interface DialogConfirmationStyleProps {
     modalPositionLeft: number;
     modalPositionTop: number;
 }
@@ -13,39 +12,35 @@ export const Container = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.75);
-}
-`
+    z-index: 1;
+`;
 
-export const Modal = styled.div<ModalStyleProps>`    
-    ${({ width, modalPositionLeft, modalPositionTop }) => css`
+export const Dialog = styled.div<DialogConfirmationStyleProps>`
+    ${({ modalPositionLeft, modalPositionTop }) => css`
         position: fixed;
-        width: ${width}px;
+        width: 300px;
+        height: 160px;
         padding: 25px 20px;
         margin-left: ${modalPositionLeft}px;
         margin-top: ${modalPositionTop}px;
         border-radius: 2px;
         background: #ffffff;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
     `}
-`
-export const ContentWrap = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-`
-
-export const Content = styled.div`
-    position: relative;
-    height: 100%;
-`
-
-export const Bottom = styled.div`
-    position: absolute;
-    bottom:0;
-    width: 100%;
 `;
 
-export const ButtonWrap = styled.div`
+export const Content = styled.div`
+    flex: 1 0 auto;
+    justify-content: center;
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 25px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+`;
+
+export const ButtonBox = styled.div`
+    display: flex;
+    justify-content: space-around;
 `;

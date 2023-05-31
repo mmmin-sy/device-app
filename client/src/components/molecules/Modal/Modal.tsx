@@ -30,7 +30,6 @@ const Modal = ({ width, height, onCancle, onSave, children }: ModalProps) => {
         <Styled.Container>
             <Styled.Modal
                 width={width}
-                height={height}
                 modalPositionLeft={modalPositionLeft} 
                 modalPositionTop={modalPositionTop}
             >

@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import * as Styled from './DeviceTable.styles';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import { ReformedDeviceDataType, DeviceDetailType } from '../../../types/device.type';
+import DialogConfirmation from '../../molecules/DialogConfirmation/DialogConfirmation';
 
 interface RowProps {
     id: number;
@@ -10,7 +12,13 @@ interface RowProps {
 }
 
 const Row = ({ id, rowData, onDeleteRow, toggleModal }: RowProps) => {
+    const [openDialog, setOpenDialog] = useState(false);
     const row: DeviceDetailType[] = Object.values(rowData);
+
+    const deleteItem = (id: number) => {
+        onDeleteRow(id);
+        setOpenDialog(false);
+    }
 
     return (
         <Styled.Row>
@@ -27,8 +35,16 @@ const Row = ({ id, rowData, onDeleteRow, toggleModal }: RowProps) => {
             </Styled.Cell>
 
             <Styled.Cell justifyContent="flex-end">
-                <Styled.Link onClick={() => onDeleteRow(id)}><AiFillDelete /></Styled.Link>
+                <Styled.Link onClick={() => setOpenDialog(true)}><AiFillDelete /></Styled.Link>
             </Styled.Cell>
+
+            {openDialog && (
+                <DialogConfirmation 
+                    text="Are you sure you want to delete this item?" 
+                    onCancle={() => setOpenDialog(false)} 
+                    onConfirm={() => deleteItem(id)}
+                />
+            )}
         </Styled.Row>
     );
 }
