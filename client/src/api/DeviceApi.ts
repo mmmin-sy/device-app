@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DeviceType } from '../types/device.type';
+import { DeviceType, DeviceAddFormType } from '../types/device.type';
 
 const http = axios.create({
     baseURL: 'http://localhost:3001/api',
@@ -20,7 +20,7 @@ export const getList = (page: number, orderBy: string, order: string) => {
     .catch(error => error)
 }
 
-export const addItem = (data: DeviceType) => {
+export const addItem = (data: DeviceAddFormType) => {
     return http.post('/device', data)
     .then(data => data.data)
     .catch(error => error)

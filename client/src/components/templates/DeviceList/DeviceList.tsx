@@ -37,14 +37,12 @@ const DeviceList = () => {
 	}
 
 	const addDevice = (newData: DeviceAddFormType) => {
-		const maxId = data ? Math.max(...data.map(item => item.id)) : 0;
 		setCurrentPage(1);
 		setOrderBy('id');
 		setOrder('ASC');
 		setCurrentAscendingIndex(0);
 
 		addItem({
-			id: maxId + 1,
 			deviceName: newData.deviceName,
 			deviceType: newData.deviceType,
 			ownerName: newData.ownerName,
