@@ -19,6 +19,12 @@ const TableHeader = ({ data, onSorting, currentAscendingIndex}: TableHeader) => 
                     currentAscendingIndex={currentAscendingIndex}
                 />
             )}
+            <TableHeaderCell 
+                key={data.length}
+                index={data.length} 
+                item="Action" 
+                justifyContent="center"
+            />
         </Styled.TableHeader>  
     );
 }
