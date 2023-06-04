@@ -12,9 +12,11 @@ interface InputProps {
     minLength?: number;
     max?: number;
     maxLength?: number;
+    showValidation?: boolean;
+    placeholder?: string;
 }
 
-const Input = ({ type = 'text', value, disabled, min, minLength, max, maxLength, errorMessage, validateRule, onChange }: InputProps) => {
+const Input = ({ type = 'text', value, disabled, min, minLength, max, maxLength, errorMessage, validateRule, onChange, placeholder, showValidation = true }: InputProps) => {
     const [inputValue, setInputValue] = useState(value ?? '');
     const [error, setError] = useState(false);
     const [currentErrorMessage, setCurrentErrorMessage] = useState(errorMessage);
@@ -55,10 +57,15 @@ const Input = ({ type = 'text', value, disabled, min, minLength, max, maxLength,
                 value={inputValue} 
                 onChange={onChangeInput} 
                 disabled={disabled} 
+                placeholder={placeholder}
             />
-            <Styled.ErrorMessege>
-                {error && (<Styled.Messege>{currentErrorMessage}</Styled.Messege>)}
-            </Styled.ErrorMessege>
+
+            {showValidation && (
+                <Styled.ErrorMessege>
+                    {error && (<Styled.Messege>{currentErrorMessage}</Styled.Messege>)}
+                </Styled.ErrorMessege>
+            )}
+            
         </Styled.Container>
     );
 }

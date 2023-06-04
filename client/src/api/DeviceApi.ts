@@ -8,11 +8,13 @@ const http = axios.create({
     }
 });
 
-export const getList = (page: number, orderBy: string, order: string) => {
+export const getList = (page: number, orderBy: string, order: string, searchType?: string, search?: string) => {
     const params = {
         page,
         orderBy,
-        order
+        order,
+        searchType,
+        search
     };
 
     return http.get('/device', { params })

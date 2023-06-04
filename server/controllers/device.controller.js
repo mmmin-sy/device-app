@@ -19,15 +19,27 @@ exports.create = (req, res) => {
 
 exports.findAndCountAll = (req, res) => {
     const page = req.query.page;
-    const orderBy = req.query.orderBy;
-    const order = req.query.order;
+    const orderBy = req.query.orderBy === '' ? 'id' : req.query.orderBy;
+    const order = req.query.order === '' ? 'ASC' : req.query.order;
+    const search = req.query.search;
+    const searchType = req.query.searchType;
     const limit = 10;
     const offset = (page - 1) * limit;
 
+    // Todo: Search with search type e.g) device name..
     Device.findAndCountAll({
+      attributes: ['id', 'deviceName', 'deviceType', 'ownerName', 'batteryStatus'],
       limit,
       offset,
-      order: [[orderBy, order]]  
+      order: [[orderBy, order]],
+      where: search ? {
+        [Op.or]: [
+          {deviceName: {[Op.like]: `%${search}%`}},
+          {deviceType: {[Op.like]: `%${search}%`}},
+          {ownerName: {[Op.like]: `%${search}%`}},
+          {batteryStatus: {[Op.like]: `%${search}%`}}
+        ]
+      } : {}
     })
         .then(data => res.send(data))
         .catch(error => res.status(500).send({

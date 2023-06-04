@@ -11,6 +11,7 @@ import {
 	ReformedDeviceDataType 
 } from '../../../types/device.type';
 import Pagination from '../../molecules/Pagination/Pagination';
+import SearchBox from '../../molecules/SearchBox/SearchBox';
 
 const DeviceList = () => {
     const [data, setData] = useState<DeviceType[]>([]);
@@ -27,8 +28,8 @@ const DeviceList = () => {
 		getDeviceList(currentPage, orderBy, order);
 	}, [currentPage])
 
-	const getDeviceList = (page: number, orderBy: string, order: string) => {
-		getList(page, orderBy, order)
+	const getDeviceList = (page: number, orderBy: string, order: string, searchType?: string, search?: string) => {
+		getList(page, orderBy, order, searchType, search)
 		.then(data => {
 			setData(data.rows);
 			setTotal(data.count);
@@ -87,15 +88,21 @@ const DeviceList = () => {
 	}
 
 	const onSorting = (index: number, ascending: boolean) => {
-		
 		setCurrentAscendingIndex(index);
-		
 		const sampleObj = data[0];
 		const sortingKey = Object.keys(sampleObj)[index];
 		setCurrentPage(1);
 		setOrderBy(sortingKey);
 		setOrder(ascending ? 'ASC' : 'DESC');
 		getDeviceList(1, sortingKey, ascending ? 'ASC' : 'DESC');
+	}
+
+	const onSearch = (searchString: string) => {
+		setCurrentPage(1);
+		setOrderBy('id');
+		setOrder('ASC');
+		setCurrentAscendingIndex(0);
+		getDeviceList(1, 'id', 'ASC', '', searchString);
 	}
 
 	const reformedData = (): ReformedDeviceDataType[] => {
@@ -144,7 +151,12 @@ const DeviceList = () => {
             </div>
 
 			{error && <span>Error!</span>}	
-            <Button onClick={() => setOpenAddModal(true)}>New Device</Button>
+
+			<Styled.BottomArea>
+				<Button onClick={() => setOpenAddModal(true)}>New Device</Button>
+				<SearchBox onSearch={(searchString: string) => onSearch(searchString)} />
+			</Styled.BottomArea>
+            
 
 			{openAddModal && (
 				<DeviceAddModal 
