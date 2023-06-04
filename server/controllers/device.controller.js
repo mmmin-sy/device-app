@@ -1,7 +1,7 @@
 const db = require('../models');
 const Device = db.devices;
 const Op = db.Sequelize.Op;
-
+const { QueryTypes } = require('sequelize');
 exports.create = (req, res) => {
     const device = {
         deviceName: req.body.deviceName,
@@ -25,21 +25,40 @@ exports.findAndCountAll = (req, res) => {
     const searchType = req.query.searchType;
     const limit = 10;
     const offset = (page - 1) * limit;
+    let whereStatement = '';
 
-    // Todo: Search with search type e.g) device name..
+    if (searchType) {
+      switch(searchType) {
+          case 'deviceName':
+            whereStatement = {deviceName: {[Op.like]: `%${search}%`}}
+            break;
+          case 'deviceType':
+            whereStatement = {deviceType: {[Op.like]: `%${search}%`}}
+            break;
+          case 'ownerName':
+            whereStatement = {ownerName: {[Op.like]: `%${search}%`}}
+            break;
+          case 'batteryStatus':
+            whereStatement = {batteryStatus: {[Op.like]: `%${search}%`}}
+            break;
+          case 'all':
+            whereStatement =  {
+              [Op.or]: [
+                {deviceName: {[Op.like]: `%${search}%`}},
+                {deviceType: {[Op.like]: `%${search}%`}},
+                {ownerName: {[Op.like]: `%${search}%`}},
+                {batteryStatus: {[Op.like]: `%${search}%`}}
+              ]
+            }  
+        }
+    } 
+
     Device.findAndCountAll({
       attributes: ['id', 'deviceName', 'deviceType', 'ownerName', 'batteryStatus'],
       limit,
       offset,
       order: [[orderBy, order]],
-      where: search ? {
-        [Op.or]: [
-          {deviceName: {[Op.like]: `%${search}%`}},
-          {deviceType: {[Op.like]: `%${search}%`}},
-          {ownerName: {[Op.like]: `%${search}%`}},
-          {batteryStatus: {[Op.like]: `%${search}%`}}
-        ]
-      } : {}
+      where: search ? whereStatement : {}
     })
         .then(data => res.send(data))
         .catch(error => res.status(500).send({

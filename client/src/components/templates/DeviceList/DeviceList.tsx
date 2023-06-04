@@ -97,12 +97,12 @@ const DeviceList = () => {
 		getDeviceList(1, sortingKey, ascending ? 'ASC' : 'DESC');
 	}
 
-	const onSearch = (searchString: string) => {
+	const onSearch = (searchType: string, searchString: string) => {
 		setCurrentPage(1);
 		setOrderBy('id');
 		setOrder('ASC');
 		setCurrentAscendingIndex(0);
-		getDeviceList(1, 'id', 'ASC', '', searchString);
+		getDeviceList(1, 'id', 'ASC', searchType, searchString);
 	}
 
 	const reformedData = (): ReformedDeviceDataType[] => {
@@ -154,7 +154,7 @@ const DeviceList = () => {
 
 			<Styled.BottomArea>
 				<Button onClick={() => setOpenAddModal(true)}>New Device</Button>
-				<SearchBox onSearch={(searchString: string) => onSearch(searchString)} />
+				<SearchBox onSearch={(seartchType: string, searchString: string) => onSearch(seartchType, searchString)} />
 			</Styled.BottomArea>
             
 
