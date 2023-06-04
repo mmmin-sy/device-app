@@ -25,7 +25,7 @@ exports.findAndCountAll = (req, res) => {
     const searchType = req.query.searchType;
     const limit = 10;
     const offset = (page - 1) * limit;
-    let whereStatement = '';
+    let whereStatement = {};
 
     if (searchType) {
       switch(searchType) {
